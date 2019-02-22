@@ -1,7 +1,1 @@
-## This is a Webhook powered website.
-
-This is the boilerplate readme installed whenever you create a [Webhook CMS](http://www.webhook.com) powered site. You should probably replace it with information specific to your site.
-
-* [Documentation for users found here.](http://webhook.com/docs/)
-* [Documentation for code contributors found here.](https://github.com/webhook/webhook-generate/blob/master/CONTRIBUTING.md)
-# summitzine
+This is the current iteration of the Summit Magazine website. It's still running on Webhook CMS, which is currently EOL. Needs to be migrated ASAP. Planning to use this system: https://medium.com/sanctuary-computer-inc/migrating-from-webhook-cms-to-contentful-netlify-dac5ccbe9ca9
