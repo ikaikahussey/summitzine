@@ -1,0 +1,78 @@
+{% extends "templates/partials/base.html" %}
+{% block title %}{% parent %} - {{ item.name }}{% endblock %}
+{% block content %}
+<article class="" id="{{ item.slug }}">
+	{% if item.cover %}
+        <img width="100%" src="{{ item.cover.url }}" />
+	{% endif %}
+		<div class="row" id="hed">
+			<div class="small-12 large-4 columns">
+				<div class="" id="article_meta" style="border-bottom: 3px #a5a5a5 double;padding-bottom:20px;">
+					{% if item.guide_relationship %}
+						<div class="ui teal labels">
+						{% for guide in item.guide_relationship %}
+							<a class="ui label" href="{{ url(guide) }}">
+								<i class="icon compass"></i> {{ guide.name }}
+							</a>
+							<a class="ui label" href="/guides/hello-aloha">
+								<i class="icon compass"></i> Hello Aloha
+							</a>
+						{% endfor %}
+						</div>
+					{% endif %}
+					<h1 style="border-bottom:0px;padding-bottom:0px;">
+						<i class="info circle icon"></i> {{ item.name }}
+					</h1>			
+					{% for tag in item.tags %}
+						<div class="ui orange label">
+							{{ tag.name }}
+						</div>
+					{% endfor %}
+				</div>
+				<div class="">
+					<header>About</header>
+				</div>
+				<div class="">
+				{% if item.image %}
+					<div class="closing_button_plus">
+						<img src="{{ item.image.url }}" />
+					</div>
+				{% endif %}	
+				{% if item.description %}
+					<small>{{ item.description|safe }}</small>
+				  {% endif %}
+				</div>
+				<div class="">
+					<header>Info</header>
+				</div>
+				<div class="">
+				  {% if item.address.street1 %}
+					<div class="grid-block">
+				        <a href="http://maps.google.com/?q={{ item.address.street1 }} {{ item.address.city }} {{ item.address.state }}">
+				        <address><i class="marker icon"></i> 
+				          {{ item.address.street1 }}<br/>
+				          {% if item.address.street2 %}{{ item.address.street2 }}<br/>{% endif %}
+				          {{ item.address.city }}, {{ item.address.state }} {{ item.address.country }}
+				          {{ item.address.zip }}
+				        </address>
+				        </a>
+					</div>
+				{% endif %}
+				</div>
+				{% if item.phone %}
+				<div class="col-sm-5">
+					<a href="tel:+{{item.phone}}"><i class="phone square icon"></i> {{item.phone}}</a>
+				</div>
+				{% endif %}
+			</div>
+			<div class="small-12 large-8 columns">
+				{% if item.related_posts %}
+					<header>Stories</header>
+			        {% for item in item.related_posts %}
+			        	{% include "templates/partials/list_item.html" %}	
+			        {% endfor %}
+				{% endif %}
+			</div>
+		</div>
+</article>
+{% endblock %}

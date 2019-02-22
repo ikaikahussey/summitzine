@@ -1,0 +1,39 @@
+<ul class="list-unstyled" id="post_info">
+
+	<li id="date">
+		<time>{{ item.publish_date|date('F d Y') }}</time>
+	</li>
+
+	{% if item.department %}
+	<li id="department">
+		<label>Department</label>
+			{% for dept in item.department|slice(0,1) %}
+				<a href="{{ url(dept) }}">{{ dept.name }}</a>{% if not loop.last %}{% endif %}
+		{% endfor %}
+	</li>
+	{% endif %}
+
+	{% if item.partner %}
+	<li id="partner">
+		{% for business in item.partner %}
+			Summit + <a href="{{ url(business) }}"><strong>{{ business.name }}</strong></a>
+		{% endfor %}
+	</li>
+	{% endif %}
+
+	{% if item.places %}
+	<li id="department">
+		<label>Place</label>
+		{% for place in item.places %}
+			<a href="{{ url(place) }}">{{ place.name }}</a>
+		{% endfor %}
+	</li>
+	{% endif %}
+	
+	<li id="byline">
+    {% for relation in row.byline %}
+      <a href="{{ url(relation) }}">{{ relation.name }}</a>{% if not loop.last %},{% endif %}
+    {% endfor %}
+	</li>
+
+</ul>

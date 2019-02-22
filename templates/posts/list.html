@@ -1,0 +1,19 @@
+{% extends "templates/partials/base.html" %}
+{% block title %}{% parent %} - Posts{% endblock %}
+{% block body_attributes %}data-search-index="false"{% endblock %}
+{% block content %}
+<section class="" id="below_the_fold">
+
+	<ul class="breadcrumbs">Posts</ul>
+
+	<section class="row column" id="">
+		{% set data = cms.posts %}
+		{% set data = data|sort('publish_date', true) %}
+		{% set data = paginate(data, 20) %}
+			{% for item in data %}
+				{% include "templates/partials/list_item.html" %}
+		    {% endfor %}
+		{% include "templates/partials/paginator.html" %}
+	</section>
+</section>
+{% endblock %}

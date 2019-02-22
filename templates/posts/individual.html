@@ -1,0 +1,268 @@
+{% extends "templates/partials/base.html" %}
+{% block title %}{% parent %} - {{ item.name }}{% endblock %}
+{% block content %}
+<article class="" id="{{ item.slug }}">
+   	<div class="posterboard">
+    	 <img src="{{ item.cover.url }}">
+    	 {% if item.cover_caption %}
+	 		<div class="row">
+	 			<div class="column">
+		 			<div id="cover_caption">
+			 			{{ item.cover_caption }}
+			 		</div>
+	 			</div>
+	 		</div>
+    	 {% endif %}
+	</div>
+	<section class="" id="below_the_fold">
+		<div id="hed">
+			<div class="row">
+				<nav aria-label="You are here:" role="navigation">
+					<ul class="breadcrumbs">
+						<li><a href="/posts">All Posts</a></li>
+						{% if item.department %}
+						<li>
+							{% for dept in item.department|slice(0,1) %}
+								<a class="{{ dept.slug_department }}" href="{{ url(dept) }}">{{ dept.name }}</a>
+								{% if not loop.last %}{% endif %}
+							{% endfor %}
+						</li>
+						{% endif %}
+					</ul>
+				</nav>
+				<div class="" id="article_meta">
+					{% if item.cover_photo_credit %}
+			        	<figcaption id="cover_credit">
+				        	{% for photog in item.cover_photo_credit %}
+								<a href="{{ url(photog) }}">{{ photog.name }}</a>
+							{% endfor %}
+						</figcaption>
+			        {% endif %}
+					<h1>
+						{{ item.name }}
+					</h1>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="body">
+			<div class="small-12 large-3 columns">
+				{% if item.partner %}
+					{% for plus in item.partner %}
+						{% if plus.logo %}
+							<div class="closing_button_plus">
+								<a href="{{ url(plus) }}"><img src="{{ plus.logo.url }}" /></a>
+							</div>
+						{% endif %}
+					{% endfor %}
+				{% else %}
+				<div class="closing_button_enclosure" style="">
+					<div class="closing_button {% if item.department %}{% for dept in item.department|slice(0,1) %}{{ dept.slug_department }}{% if not loop.last %}{% endif %}
+						{% endfor %}{% endif %}">
+						<a href="/">
+							<img src="/static/images/branding/crownroyal_trans_simple_100.png" />
+						</a>
+					</div>
+				</div>
+				{% endif %}
+	
+	
+					{% if item.partner %}
+					{% for each in item.partner %}
+					<p id="summitplus">
+					<a href="/" class="summitbrand">Summit</a> + <a href="{{ url(each) }}">{{ each.name }}</a>
+					</p>
+					{% endfor %}
+					{% endif %}
+	
+	
+			
+				<table class="unstriped stack {% for dept in item.department|slice(0,1) %}{{ dept.slug_department }}{% if not loop.last %}{% endif %}{% endfor %}" id="post_meta">
+				
+	
+
+				
+					<tr>
+						<td>Date</td>
+						<td><time>{{ item.publish_date|date('F d Y') }}</time></td>
+					</tr>
+					{% if item.places %}
+					<tr>
+						<td>Place</td>
+						<td><a href="{{ url(item.places) }}">{{ item.places.name }}</a></td>
+					</tr>
+					{% endif %}
+					{% if item.bylines %}
+					{% for byline in item.bylines %}
+					<tr>
+						<td>Text</td>
+						<td><a href="{{ url(byline) }}">{{ byline.name }}</a></td>
+					</tr>
+					 {% endfor %}
+					 {% endif %}
+					{% if item.art %}
+					{% for artist in item.art %}
+					<tr>
+						<td>Art</td>
+						<td><a href="{{ url(artist) }}">{{ artist.name }}</a></td>
+					</tr>
+					 {% endfor %}
+					 {% endif %}
+				</table>
+				{% if item.gallery %}
+					<a class="circular ui basic icon button" href="#story_gallery" tabindex="0">
+						<i class="camera retro icon"></i>
+					</a>
+				{% endif %}
+			</div>
+			<div class="small-12 large-5 columns">
+				<div class="" id="article_body">
+					{% if item.cover.url == "" %}
+						<section id="tile_image">
+							<img src="{{ item.tile_image.url }}">
+						</section>
+					{% endif %}
+					{% if item.partner %}
+						{% for plus in item.partner %}
+							{% if plus.description %}
+								<div class="success callout" data-closable="slide-out-right">
+								   <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+    <span aria-hidden="true">&times;</span>
+  </button>
+								  {{ plus.description|safe }}
+								</div>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+					{% if item.body %}
+						<section id="post_body">
+							{{ item.body|safe }}
+						</section>
+					{% endif %}
+					{% if item.list %}
+						<div id="listicle">
+							 {% for row in item.list %}
+									<article>
+										<h3>
+											{{ row.title }}
+										</h3>
+										{{ row.body|safe }}
+										<ul class="post_info_index">
+										{% if row.place_relationship.name %}
+											<li>
+												<a class="" href="{{ url(row.place_relationship) }}">
+													{{ row.place_relationship.name }}
+												</a>
+											</li>
+										{% endif %}
+										{% for relation in row.entity_relationship %}
+											<li>
+							              	<a class="" href="{{ url(row.entity_relationship) }}">{{ row.entity_relationship.name }}</a>
+								            <!--   {{ relation.description|striptags }} -->
+							          </li>
+						            {% endfor %}
+									</ul>
+								</article>
+							{% endfor %}
+						  </div>
+					{% endif %}
+					{% if item.podcast %}
+						<audio src="{{ item.podcast.url }}" controls></audio>
+						<a href="{{ item.podcast.url }}">Download</a>
+					{% endif %}
+					{% if item.action %}
+						<section class="alert alert-success" id="action">
+							{{ item.action|safe }}
+				      </section>
+					{% endif %}
+					</div>
+			</div>
+			<div class="small-12 large-4 columns">
+				{% if item.partner %}
+
+				{% else %}
+					<div class="ad" id="right_rail">
+					
+					<script src="//ap.lijit.com/www/delivery/fpi.js?z=452320&width=300&height=600"></script> 
+						
+
+
+					</div>
+				{% endif %}
+			</div>
+		</div>
+		{% if item.gallery %}
+			<div class="row" id="story_gallery">
+				<div class="small-12 large-4 columns">
+					<header>Gallery <i class="camera retro icon"></i></header>
+				</div>
+				<div class="small-12 large-8 columns" id="lightgallery">
+					{% for image in item.gallery %}
+						<a style="width:150px;height:150px;" href="{{ image|imageSize(1500,auto) }}" data-sub-html="{{ image.caption }}" class="gallery_tile">
+							<img src="{{ image|imageCrop(150) }}">
+						</a>
+					{% endfor %}
+				</div>
+				<script src="/static/javascript/6f172c6a.6f172c6a.packery.pkgd.min.js"></script>
+				<script type="text/javascript">
+				var container = document.querySelector('#lightgallery');
+				var pckry = new Packery( container, {
+				  // options
+				  itemSelector: '.gallery_tile',
+				  gutter: 10,
+				});
+				</script>
+			</div>
+		{% endif %}
+		
+		
+		<div class="row" id="more">
+			<div class="small-12 large-4 columns">
+				<header>Read Next <i class=""></i></header>
+			</div>
+			<div class="small-12 large-8 columns" id="tiles">
+			  	{% set tiles = cms.posts|where('evergreen') %}
+				{% for tile in tiles|sort('publish_date', true)|slice(0,20) %}
+			    <article class="tile {% if tile.department %}{% for dept in tile.department|slice(0,1) %}{{ dept.slug_department }}{% if not loop.last %}{% endif %}{% endfor %}{% endif %} tile2 {{ tile.tile_type }}2">
+			   		<a href="{% if tile.link %}{{ tile.link }}{% else %}{{ url(tile) }}{% endif %}">
+						<img class="" src="{{ tile.tile_image.url }}" style="width:auto;">
+			   		</a>
+		    	</article>
+			{% endfor %}
+
+
+<!--
+		{% set data = cms.posts %}
+		{% set data = data|sort('publish_date', true) %}
+		{% set data = paginate(data, 5) %}
+			{% for item in data %}
+				{% include "templates/partials/list_item.html" %}
+		    {% endfor %}
+-->
+
+			</div>
+		</div>
+	</section>
+</article>
+
+	
+
+
+
+
+		
+				
+<script src="/static/javascript/6f172c6a.6f172c6a.packery.pkgd.min.js"></script>
+<script type="text/javascript">
+var container = document.querySelector('#tiles');
+var pckry = new Packery( container, {
+  // options
+  itemSelector: '.tile',
+  gutter: 10
+  });
+var $stamp = $container.find('.stamp').first();
+var isStamped = false;
+</script>
+
+
+
+{% endblock %}

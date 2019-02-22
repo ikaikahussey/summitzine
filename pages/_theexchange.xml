@@ -1,0 +1,69 @@
+{% set podcast = getItem('department', '-JokNt5xdKirGNi3a8Lq', true) %}
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+
+<channel>
+
+  <title>The Exchange</title>
+
+  <link>http://summitzine.com/departments/the-exchange</link>
+
+  <language>en-us</language>
+
+
+    <copyright>&#x2117; &amp; &#xA9; Copyright 2015 Archipelago Inc. </copyright>
+    <itunes:subtitle>Conversations with the people who make Hawaii business happen</itunes:subtitle>
+
+  <itunes:author>Summit</itunes:author>
+
+  <itunes:summary>Summit Magazine, in partnership with American Savings Bank, presents The Exchange, a series of conversations with the people who make Hawaii business happen</itunes:summary>
+
+  <description>Summit Magazine, in partnership with American Savings Bank, presents The Exchange, a series of conversations with the people who make Hawaii business happen</description>
+
+  <itunes:owner>
+    <itunes:name>Summit</itunes:name>
+    <itunes:email>ikaika@summitzine.com</itunes:email>
+  </itunes:owner>
+
+  <itunes:image href="{{ podcast.image }}" />
+
+  {# You'll want to set these manually. Check https://www.apple.com/itunes/podcasts/specs.html#categories for reference. #}
+  {# <itunes:category text="Technology"> #}
+  {#   <itunes:category text="Gadgets"/></itunes:category> #}
+  {# <itunes:category text="TV &#38;amp; Film"/> #}
+
+
+	{% for episode in item.posts_department %}
+
+
+
+    <item>
+
+      <title>{{ episode.name }}</title>
+
+      <itunes:author>{{ podcast.author }}</itunes:author>
+
+      <itunes:subtitle>{{ episode.subtitle }}</itunes:subtitle>
+
+      <itunes:summary>{{ episode.description }}</itunes:summary>
+
+      <itunes:image href="{{ episode.image }}" />
+
+      <enclosure url="{{ episode.audio_file }}" length="8727310" type="audio/x-m4a" />
+
+      <guid>{{ episode.audio_file }}</guid>
+
+      <pubDate>{{ episode.publish_date|date('D, j M Y h:i:s e') }} Wed, 15 Jun 2005 19:00:00 GMT</pubDate>
+
+      <itunes:duration>{{ episode.duration }}</itunes:duration>
+
+    </item>
+
+  {% endfor %}
+
+
+</channel>
+
+</rss>

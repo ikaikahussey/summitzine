@@ -1,0 +1,50 @@
+<article class="full row">
+		<div class="col-sm-6">
+			<div class="ui fluid image">
+				{% if item.partner %}
+					<div class="ui black ribbon label" id="partner">
+						{% for each in item.partner %}
+							<span href="/" class="summitbrand">Summit</span> + <span>{{ each.name }}</span>
+						{% endfor %}
+					</div>
+				{% endif %}
+				{% if item.cover  %}
+					<a href="{{ url(item) }}">
+						<img class="" src="{{ item.cover.url }}" width="100%">
+					</a>
+				{% else %}
+					<a href="{{ url(item) }}">
+						<img class="" src="{{ item.tile_image.url }}" width="auto">
+					</a>
+				{% endif %}
+			</div>
+		</div>
+	   	<div class="col-sm-6 teaser">
+			<ul class="post_info_index">
+				{% if item.department %}
+					{% for dept in item.department|slice(0,1) %}
+						<li class="ui tag label {{ dept.slug_department }}">
+							<a href="{{ url(dept) }}">{{ dept.name }}</a>
+						</li>
+					{% if not loop.last %}{% endif %}
+					{% endfor %}
+				{% endif %}
+			</ul>
+			<header>
+		   		<a href="{{ url(item) }}">
+		   			{{ item.name }}
+		   		</a>
+		   	</header>
+		   	<div>{{ item.teaser }}</div>
+		   	<div class="">
+		   		{% if item.podcast %}
+		   			<div class="watermark"><i class="sound icon"></i></div>
+		   		{% endif %}
+		   		{% if item.gallery %}
+		   			<div class="watermark"><i class="camera retro icon"></i></div>
+		   		{% endif %}
+
+		   	</ul>
+		</div>
+	
+</article>

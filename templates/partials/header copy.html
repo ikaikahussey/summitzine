@@ -1,0 +1,131 @@
+{% set covers = cms.posts %}
+{% for cover in covers|sort('publish_date', true)|slice(0,1) %}
+
+<nav class="ui menu">
+	<a href="/" class="item {% if cover.flag == 'negative' %}hello{% endif %}" id="branding">
+	  Summit
+	</a>
+	<span class="item hidden-xs">The Modern Island | Honolulu, Hawaii</span>
+  	<div class="right menu">
+    	<a class="item" data-toggle="modal" data-target="#searchmodal">
+			<i class="icon search"></i>
+		</a>
+    	<a class="item snipcart-checkout" href="#">
+			<i class="icon shop">
+			</i>
+    	</a>
+		<a id="subscribe" class="item" href="https://summitzine.memberful.com/checkout?plan=9755">
+			<i class="user icon"></i>
+		</a>
+		<a class="item" data-toggle="modal" data-target="#contentsmodal">
+			<i class="ellipsis vertical icon"></i>
+		</a>
+<!--
+		<a class="item" href="/shop">
+			The Summit Shop
+		</a>
+-->
+  	</div>
+</nav>
+
+{% endfor %}
+
+
+
+<!-- Search Modal -->
+<div class="modal fade" id="searchmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Search</h4>
+      </div>
+      <div class="modal-body">
+		<script>
+		  (function() {
+		    var cx = '014672154349516476516:uxz9ejngf1k';
+		    var gcse = document.createElement('script');
+		    gcse.type = 'text/javascript';
+		    gcse.async = true;
+		    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+		    var s = document.getElementsByTagName('script')[0];
+		    s.parentNode.insertBefore(gcse, s);
+		  })();
+		</script>
+		<gcse:search></gcse:search>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+			
+<!-- Contents Modal -->
+
+<div class="modal fade" id="contentsmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					Contents
+				</h4>
+			</div>
+			<div class="modal-body">
+				<section class="container-fluid" id="">
+					<div class="row">
+						<div class="col-md-8">
+						  	<dl>
+								<dt><a class="anuenue" href="/departments/anuenue">Anuenue</a></dt>
+								<dd>Lifestyle & Culture</dd>
+			
+								<dt><a class="originals" href="/departments/originals">Originals</a></dt>
+								<dd>Creativity & Arts</dd>
+		
+								<dt><a class="industry" href="/departments/industry">Industry</a></dt>
+								<dd>Business & Economics</dd>
+		
+								<dt><a class="commons" href="/departments/commons">Commons</a></dt>
+								<dd>Briefings & Reports</dd>
+		
+								<dt><a class="letters" href="/departments/letters">Letters</a></dt>
+								<dd>Poetry & Prose</dd>
+						  		
+						  	</dl>
+						</div>
+						<div class="col-md-4">
+						  	<dl>
+								<dt><a href="/agenda">The Agenda</a></dt>
+								<dd>Curated events & experiences</dd>
+								
+								<dt><a href="/posts">The Latest</a></dt>
+								<dd>Blog posts</dd>
+								<dt><a href="/departments/education-summit/">Education Summit</a></dt>
+								<dd>Teaching for tomorrow</dd>
+								<dt><a href="http://www.summitzine.com/posts/a-guide-to-the-city/">Hello Aloha</a></dt>
+								<dd>A guide to Honolulu</dd>
+						  	</dl>
+						</div>
+					</div>
+				</section>
+				<section class="container-fluid" id="signup">
+					<div class="row">
+						<div class="centered" style="">
+							<form action="http://archipelagoinc.createsend.com/t/i/s/druyiu/" method="post" id="subForm">
+								<h2>Sign Up for <em>The Dispatch</em>, Summit's email newsletter of stories and curated events</h2>
+							    <p>
+							        <input id="fieldEmail" name="cm-druyiu-druyiu" type="email" placeholder="Email" class="form-control" required />
+							    </p>
+							    <p>
+							        <button type="submit">Subscribe</button>
+							    </p>
+							</form>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>

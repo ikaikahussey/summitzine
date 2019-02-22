@@ -1,0 +1,214 @@
+{% set covers = cms.posts %}
+{% for cover in covers|sort('publish_date', true)|slice(0,1) %}
+
+{% endfor %}
+
+<!--
+<div style="text-align:center;background:black;">
+<script src="//ap.lijit.com/www/delivery/fpi.js?z=452319&width=970&height=250"></script> 
+
+</div>
+-->
+
+
+
+<div class="off-canvas-wrapper">
+  <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+<!--
+    <div class="title-bar" data-responsive-toggle="widemenu">
+      <div class="title-bar-left">
+        <button class="menu-icon" type="button" data-open="TOC"></button>
+      </div>
+      
+<div class="title-bar-right">
+        <span class="title-bar-title">Login</span>
+        <button class="menu-icon" type="button" data-open="offCanvasRight"></button>
+      </div>
+
+    </div>
+-->
+    <div class="off-canvas position-left" id="TOC" data-off-canvas>
+		<nav class="row small-up-1 medium-up-1 large-up-1">
+				<div class="column column-block">
+				  	<dl>
+						<dt><a class="anuenue" href="/departments/anuenue">Anuenue</a></dt>
+						<dd>Lifestyle & Culture</dd>
+	
+						<dt><a class="originals" href="/departments/originals">Originals</a></dt>
+						<dd>Creativity & Arts</dd>
+	
+						<dt><a class="industry" href="/departments/industry">Industry</a></dt>
+						<dd>Business & Economics</dd>
+	
+						<dt><a class="commons" href="/departments/commons">Commons</a></dt>
+						<dd>Briefings & Reports</dd>
+	
+						<dt><a class="letters" href="/departments/letters">Letters</a></dt>
+						<dd>Poetry & Prose</dd>
+				  		
+				  	</dl>
+				</div>
+				<div class="column column-block">
+				  	<dl>
+						<dt><a href="/agenda">The Agenda</a></dt>
+						<dd>Curated events & experiences</dd>
+						
+						<dt><a href="/posts">The Latest</a></dt>
+						<dd>Blog posts</dd>
+						<dt><a href="/departments/education-summit/">Education Summit</a></dt>
+						<dd>Teaching for tomorrow</dd>
+						<dt><a href="http://www.summitzine.com/posts/a-guide-to-the-city/">Hello Aloha</a></dt>
+						<dd>A guide to Honolulu</dd>
+				  	</dl>
+				</div>
+				<div class="column column-block">
+					<div class="" style="">
+						<form action="http://archipelagoinc.createsend.com/t/i/s/druyiu/" method="post" id="subForm">
+							<h2>Sign Up for <em>The Dispatch</em>, Summit's email newsletter of stories and curated events</h2>
+						    <p>
+						        <input id="fieldEmail" name="cm-druyiu-druyiu" type="email" placeholder="Email" class="form-control" required />
+						    </p>
+						    <p>
+						        <button type="submit">Subscribe</button>
+						    </p>
+						</form>
+					</div>
+				</div>
+		</nav>
+    </div>
+  
+    <!--
+<div class="off-canvas position-right" id="offCanvasRight" data-off-canvas data-position="right">
+      <ul class="vertical dropdown menu" data-dropdown-menu>
+        <li><a href="right_item_1">Membership</a></li>
+      </ul>
+    </div>
+-->
+    <div id="tassel" class="top-bar" data-open="TOC">
+    <button class="menu-icon" type="button" data-open="TOC"></button>
+      <!--
+<div class="top-bar-left">
+      <ul class="dropdown menu" data-dropdown-menu>
+      <li><button class="menu-icon" type="button" data-open="offCanvasLeft"></button></li>
+       <li><a href="#">Politics</a>
+        <ul class="menu vertical">
+          <li><a href="#">Global</a></li>
+          <li><a href="#">Regional</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Lifestyle</a>
+        <ul class="menu vertical">
+          <li class="inactive"><a href="#">Anuenue</a></li>
+          <li><a href="#">Island Hopping</a></li>
+          <li><a href="#">Carry-Ons</a></li>
+          <li><a href="#">Goods</a></li>
+          <li><a href="#">Fashion</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Arts</a>
+        <ul class="menu vertical">
+          <li><a href="#">Music</a></li>
+          <li><a href="#">Fine Art</a></li>
+          <li><a href="#">Three</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Business</a>
+        <ul class="menu vertical">
+          <li><a href="#">Music</a></li>
+          <li><a href="#">Fine Art</a></li>
+          <li><a href="#">Three</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#">Literature</a>
+        <ul class="menu vertical">
+          <li><a href="#">Music</a></li>
+          <li><a href="#">Fine Art</a></li>
+          <li><a href="#">Three</a></li>
+        </ul>
+      </li>
+    </ul>
+   </div>
+-->
+ <!--
+ <div class="top-bar-right">
+    <ul class="menu">
+      <form action="/search">
+		<input type="text" name="q" id="tipue_search_input">
+		</form>
+      
+    </ul>
+  </div>
+-->
+
+
+</div>
+
+
+<div class="top-bar" id="main_menu">
+  <div class="top-bar-title">
+
+<!--
+    <span data-responsive-toggle="main_menu" data-hide-for="medium">
+      <button class="menu-icon dark" type="button" data-toggle></button>
+    </span>
+-->
+    <a id="branding" href="/">Summit</a>
+  </div>
+</div>
+
+<!--
+<div class="title-bar" data-responsive-toggle="secondary_menu" data-hide-for="medium">
+  <button class="menu-icon" type="button" data-toggle="secondary_menu"></button>
+  <div class="title-bar-title">Menu</div>
+</div>
+-->
+
+<div class="top-bar" id="secondary_menu">
+  <div class="top-bar-left hide-for-small-only">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text">The Modern Island</li>
+      <!--
+<li>
+        <a href="#">World</a>
+      </li>
+       <li>
+        <a href="#">Lifestyle</a>
+        <ul class="menu vertical">
+          <li class="inactive"><a href="#">Anuenue</a></li>
+          <li><a href="#">Island Hopping</a></li>
+          <li><a href="#">Carry-Ons</a></li>
+          <li><a href="#">Goods</a></li>
+          <li><a href="#">Fashion</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Arts</a>
+        <ul class="menu vertical">
+          <li><a href="#">Music</a></li>
+          <li><a href="#">Fine Art</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Business</a>
+        <ul class="menu vertical">
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Directory</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#">Literature</a>
+        <ul class="menu vertical">
+          <li><a href="#">Essays</a></li>
+          <li><a href="#">Poetry</a></li>
+        </ul>
+      </li>
+-->
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <ul class="menu">
+      <li><a href="/shop">The Summit Shop</a></li>
+    </ul>
+  </div>
+</div>
+

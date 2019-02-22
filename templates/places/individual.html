@@ -1,0 +1,28 @@
+{% extends "templates/partials/base.html" %}
+{% block title %}{% parent %} - {{ item.name }}{% endblock %}
+{% block content %}
+<div class="row" id="">
+	<section class="small-12 large-4 columns" id="">
+		<ul class="breadcrumbs">
+			<li><a href="{{ url('places') }}">Places</a></li>
+			<li class="active">{{ item.name }}</li>
+		</ul>
+		
+		<h1>{{ item.name }}</h1>
+
+		{% if item.description %}
+		<div class="general_section">
+			<h2>About</h2>
+			{{ item.description|markdown }}
+		</div>
+		{% endif %}
+	</section>	
+
+	<section class="small-12 large-8 columns" id="stories">
+		
+	    {% for item in item.posts_places %}
+		{% include "templates/partials/list_item.html" %}	
+	    {% endfor %}
+	</section>
+</div>
+{% endblock %}

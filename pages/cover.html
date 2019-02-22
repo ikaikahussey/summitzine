@@ -1,0 +1,27 @@
+{% extends "templates/partials/base.html" %}}
+{% block content %}
+
+<h1>All, by date</h1>
+
+  	{% set covers = cms.posts|where('cover')|sort('publish_date', true) %}
+
+	{% for cover in covers %}
+	
+	<img src="{{ cover.cover|imageCrop(100) }}">
+	
+	{% endfor %}
+
+
+<h1>Limited</h1>
+
+  	{% set covers = cms.posts|where('cover')|sort('publish_date', true) %}
+  	{% set first_cover = covers|slice(0,1) %}
+
+	{% for first in first_cover %}
+	
+	<img src="{{ first.cover|imageCrop(100) }}">
+	
+	{% endfor %}
+
+	
+	{% endblock %}

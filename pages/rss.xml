@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+
+{% set data = get('posts') %}
+{% set data = paginate(data, 20) %}
+
+  <channel>
+  <atom:link href="http://summitzine.com/rss.xml" rel="self" type="application/rss+xml" />
+    <title>Summit</title>
+    <link>http://summitzine.com</link>
+    <image>
+		<url>
+			http://summitzine.com/static/images/icons/favicon.ico
+		</url>
+		<title>Summit</title>
+		<link>http://summitzine.com/rss.xml</link>
+	</image>
+    <description>Summit</description>
+      {% for object in data|sort('publish_date', true) %}
+      <item>
+        <title>{{ object.name }}</title>
+        <link>http://summitzine.com{{ url(object) }}</link>
+        <description>
+          {{ object.short_version }}
+
+          {{ object.body }}
+        </description>
+        <pubDate>{{ object.publish_date|date('D, j M Y h:i:s') }} -1000</pubDate>
+      </item>
+    {% endfor %}
+  </channel>
+</rss>

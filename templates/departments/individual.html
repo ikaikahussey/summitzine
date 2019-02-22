@@ -1,0 +1,21 @@
+{% extends "templates/partials/base.html" %}
+{% block title %}{% parent %} - {{ item.name }}{% endblock %}
+{% block content %}
+<section class="" id="list">
+	<section class="" id="latest" >	
+			<div class="">
+				<a class="ui black basic button" href="/posts"><i class="icon arrow left"></i> Posts</a>
+				{% if item.screen_logo %}
+					<img src="{{ item.screen_logo.url }}" />
+				{% else %}
+					<h1 id="landing">{{ item.name }}</h1>
+				{% endif %}
+					<p>{{ item.description|safe }}</p>
+			</div>
+			{% for item in item.posts_department|sort('publish_date', true) %}
+			{% include "templates/partials/list_item.html" %}		
+			{% endfor %}
+			{% include "templates/partials/paginator.html" %}
+	</section>
+</section>
+{% endblock %}

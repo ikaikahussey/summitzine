@@ -1,0 +1,58 @@
+{% extends "templates/partials/base.html" %}
+{% block content %}
+<section class="container-fluid" id="list">
+	<section class="col-md-12" id="latest" >	
+		{% set data = get('calendar') %}
+		{% set data = data|sort("item_start", false)%}
+		{% set data = paginate(data, 20) %}
+			<div class="page-header">
+				<h1>Calendar</h1>
+			</div>
+		{% for item in data %}
+		
+		<article class="full">
+	<div class="closing_button_enclosure">
+		<div class="closing_button">
+			<a href="/">
+				<img src="/static/images/branding/crownroyal_trans_simple_100.png" />
+			</a>
+		</div>
+	</div>
+		<div class="row">
+			<div class="col-md-12 teaser">
+   			<header>
+	   			<a href="{{ url(item) }}">
+		   			<h1 class="feature">{{ item.name }}</h1>
+		   		</a>
+		   	</header>
+   			{{ item.wysiwyg_text|safe }}
+			<ul class="post_info_index">				
+				<li>Event start: {{ item.start|date('F d Y, g a') }}</li>
+		   	{% if item.end %}
+		   	<li>Event end: {{ item.end|date('F d Y, g a') }}</li>
+		   	{% endif %}
+			{% if item.partner %}
+				<li id="partner">
+					{% for each in item.partner %}
+						<a href="/" class="summitbrand">Summit</a> + <a href="{{ url(each) }}">{{ each.name }}</a>
+					{% endfor %}
+				</li>
+			{% endif %}
+			{% if item.places %}
+				<li id="place">
+					<a href="{{ url(item.places) }}">{{ item.places.name }}</a>
+				</li>
+			{% endif %}
+		</ul>
+		</div>
+	</div>
+</article>
+	
+
+		
+		
+		{% endfor %}
+		{% include "templates/partials/paginator.html" %}
+	</section>
+</section>
+{% endblock %}

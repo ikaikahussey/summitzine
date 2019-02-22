@@ -1,0 +1,30 @@
+{% extends "templates/partials/base.html" %}
+{% block title %}{% parent %} - {{ item.name }}{% endblock %}
+{% block content %}
+
+	<section id="below_the_fold" class="container-fluid">
+		<section class="col-md-12" id="latest">
+
+<!--
+
+<section class="container-fluid below_the_fold" id="{{ item.slug }}" style="margin-top:40px;margin-bottom:40px;">
+-->
+
+<div class="page-header row">
+				<header class="section_header">
+				<h1 id="landing">
+				<a href="/agenda">The agenda</a>
+				</h1>
+				<small>Curated events and island to-dos</small>
+			
+			</header>
+			</div>
+ 
+{% include "templates/partials/calendar_list_item.html" %}
+
+<!-- </section> -->
+
+		</section>
+	</section>
+
+{% endblock %}

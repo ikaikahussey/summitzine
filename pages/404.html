@@ -1,0 +1,50 @@
+{# ------------------------------------------------------- #}
+
+{# 404 PAGE #}
+
+{# This is the 404 page that will display on the live site for users. #}
+{# It does not appear when you run your site locally. #}
+
+{# ------------------------------------------------------- #}
+
+{# Confused what extends and blocks do? Watch a primer: #}
+{# http://www.webhook.com/docs/template-inheritance-blocks/ #}
+{% extends "templates/partials/base.html" %}
+
+{% block content %}
+
+	<div id="content">
+	<div class="row">
+	<div class="col-lg-8">
+
+<div class="page-header">
+		<h1>404</h1>
+
+</div>
+
+<div class="alert alert-info">Sorry, your page was not found. Search here for the appropriate content.</div>
+
+	<div class="">
+
+
+<script>
+  (function() {
+    var cx = '014672154349516476516:uxz9ejngf1k';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+
+	</div>
+	</div>
+	</div>
+		
+
+
+{% endblock %}

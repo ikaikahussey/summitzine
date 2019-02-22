@@ -1,0 +1,33 @@
+{# ------------------------------------------------------- #}
+{# ONE OFF VIEW about #}
+{# This page can use any data from http:localhost:2000/cms/#/form/about/ #}
+{# Webhook uses the SWIG.js (like Djagno/Twig) templating system. Their documentation is here: #}
+{# http://paularmstrong.github.io/swig/docs/tags/ #}
+{# Learn about calling data into Webhook pages here: #}
+{# http://www.webhook.com/docs/template-rules-and-filters/ #}
+{# ------------------------------------------------------- #}
+{# Confused what extends and blocks do? Watch a primer: #}
+{# http://www.webhook.com/docs/template-inheritance-blocks/ #}
+{% extends "templates/partials/base.html" %}
+
+{% block title %}{% parent %} - {{ cms.about.name }}{% endblock %}
+{% block content %}
+
+
+  
+
+<section class="container-fluid">
+	<section class="col-md-8">	
+
+		<h1>{{ cms.about.name }}</h1>
+
+  
+          {{ cms.about.markdown_text|markdown }}
+  
+	</section>
+	
+	<section class="col-md-4"
+		</section>
+</section>
+  
+  {% endblock %}

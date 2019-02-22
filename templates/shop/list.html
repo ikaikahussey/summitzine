@@ -1,0 +1,96 @@
+{% extends "templates/partials/base.html" %}
+{% block title %}The Summit Shop{% endblock %}
+
+{% block content %}
+
+   {% set data = cms.shop %}
+
+   {% set data = data|sort('publish_date', true) %}
+
+   {% set data = paginate(data, 20) %}
+
+
+
+		<div class="row">
+
+			<div class="column">
+			
+			<nav aria-label="You are here:" role="navigation">
+		<ul class="breadcrumbs" id="">
+			<li>
+				<a href="{{ url('shop') }}"><img style="height:20px;width:auto;" src="https://scontent.cdninstagram.com/t51.2885-19/s320x320/12751165_192935791067901_1329054800_a.jpg"> The Summit Shop</a>
+			</li>
+
+		</ul>
+		</nav>
+
+			
+				<div class="ui cards">
+					{% for item in data %}
+						<div class="card">
+							<a class="image" href="{{ url(item) }}">
+								{% for image in item.gallery|slice(0,1) %}
+								<img src="{{ image.url }}" />
+								{% endfor %}
+							</a>
+							<div class="content">
+								<a class="header" href="{{ url(item) }}">
+									{{ item.name }}
+								</a>
+								<div class="description">
+									{{ item.short_description|safe }}	
+								
+								<p>
+			${{ item.price }} USD
+			{{ item.weight }}
+		</p>
+
+
+			<button
+		    class="success button snipcart-add-item"
+		    data-item-id="{{ item._id }}"
+		    data-item-name="{{ item.name }}"
+		    data-item-price="{{ item.price }}"
+		    data-item-weight="{{ item.weight }}"
+		    data-item-url="{{ url(item) }}"
+		    data-item-custom1-editions="{{ item.editions }}"
+		    data-item-description="{{ item.description|safe }}">
+		        Add to Cart
+			</button>
+	
+									
+								</div>
+							</div>
+							
+							{% for vendor in item.vendor %}
+									<div class="extra content" id="related_stories">
+										By <a style="margin-right:10px;" href="{{ url(vendor) }}">{{ vendor.name }}</a>
+									</div>
+									{% if vendor.related_posts %}
+									<div class="extra content" id="related_stories" style="">	
+										{% for story in vendor.related_posts %}
+											<a href="{{ url(story) }}">
+												<img src="{{ story.tile_image|imageSize(100,100) }}" style="width:50px;height:50px;">
+											</a>
+										{% endfor %}
+									</div>
+									{% endif %}									
+								{% endfor %}
+					
+
+						</div>
+					{% endfor %}
+				</div>
+
+			</div>
+		</div>
+	
+	
+	
+	
+	
+
+
+  {% include "templates/partials/paginator.html" %}
+
+{% endblock %}

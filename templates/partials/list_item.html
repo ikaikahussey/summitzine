@@ -1,0 +1,60 @@
+<article class="row small-up-1 medium-up-2 large-up-2">
+		{% if item.cover  %}
+		<div class="column column-block">
+			<div class="ui fluid image">
+				{% if item.partner %}
+					<div class="ui black ribbon label" id="partner">
+						{% for each in item.partner %}
+							<span href="/" class="summitbrand">Summit</span> + <span>{{ each.name }}</span>
+						{% endfor %}
+					</div>
+				{% endif %}
+				{% if item.cover  %}
+					<a href="{{ url(item) }}">
+						<img class="" src="{{ item.cover.url }}" width="100%">
+					</a>
+				{% else %}
+					<a href="{{ url(item) }}">
+						<img class="" src="{{ item.tile_image.url }}" width="auto">
+					</a>
+				{% endif %}
+			</div>
+		</div>
+		{% endif %}
+	   	<div class="column column-block" id="teaser">
+			<ul class="post_info_index">
+				{% if item.department %}
+					{% for dept in item.department|slice(0,1) %}
+						<li class="label {{ dept.slug_department }}">
+							<a href="{{ url(dept) }}">{{ dept.name }}</a>
+						</li>
+					{% if not loop.last %}{% endif %}
+					{% endfor %}
+				{% endif %}
+			</ul>
+			<header class="excerpt" style="font-size: 1.5rem;font-family: 'Surveyor SSm A', 'Surveyor SSm B';text-transform:none;font-weight: bold;text-align:left;">
+				<a href="{% if item.link %}{{ item.link }}{% else %}{{ url(item) }}{% endif %}">
+					{{ item.name }}
+				</a>
+			</header>
+			<aside>
+				<time style="font-size:smaller;opacity:.7;">
+					{{ item.publish_date|date('F d Y') }}
+				</time>
+			</aside>
+			{% if item.teaser %}
+				{{ item.teaser }}
+				<a class="readmore" href="{% if item.link %}{{ item.link }}{% else %}{{ url(item) }}{% endif %}">Read</a>
+			{% else %}
+				{{ item.body|safe }}
+			{% endif %}
+		   	<div class="">
+		   		{% if item.podcast %}
+		   			<div class="watermark"><i class="sound icon"></i></div>
+		   		{% endif %}
+		   		{% if item.gallery %}
+		   			<div class="watermark"><i class="camera retro icon"></i></div>
+		   		{% endif %}
+		   	</div>
+	   	</div>
+</article>

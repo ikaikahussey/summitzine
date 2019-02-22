@@ -1,0 +1,82 @@
+{% extends "templates/partials/base.html" %}
+
+{% block title %}{% parent %} - {{ item.name }}{% endblock %}
+{% block content %}
+
+<div class="row" id="">
+	<div class="column">
+		<nav aria-label="You are here:" role="navigation">
+		<ul class="breadcrumbs" id="">
+			<li>
+				<a href="{{ url('shop') }}"><img style="height:20px;width:auto;" src="https://scontent.cdninstagram.com/t51.2885-19/s320x320/12751165_192935791067901_1329054800_a.jpg"> The Summit Shop</a>
+			</li>
+			<li style="opacity:.5;">
+				{{ item.name }}
+			</li>
+		</ul>
+		</nav>
+	</div>
+</div>
+<div class="row">
+
+	
+
+	
+	<div class="small-12 large-8 columns" id="info">
+	
+		<header>{{ item.name }}</header>
+
+		{% if item.vendor %}
+	
+			{% for vendor in item.vendor %}
+				<em>By <a href="{{ url(vendor) }}">{{ vendor.name }}</a></em>
+				{% for story in vendor.related_posts %}
+					<a href="{{ url(story) }}">
+						<img src="{{ story.tile_image|imageSize(50,50) }}" style="width:50px;height:50px;">
+					</a>
+				{% endfor %}
+			{% endfor %}
+		{% endif %}
+
+	
+		<p>{{ item.description|safe }}</p>
+
+	
+	
+		<p>
+			${{ item.price }} USD
+			{{ item.weight }}
+		</p>
+
+
+			<button
+		    class="success button snipcart-add-item"
+		    data-item-id="{{ item._id }}"
+		    data-item-name="{{ item.name }}"
+		    data-item-price="{{ item.price }}"
+		    data-item-weight="{{ item.weight }}"
+		    data-item-url="{{ url(item) }}"
+		    data-item-custom1-editions="{{ item.editions }}"
+		    data-item-description="{{ item.description|safe }}">
+		        Add to Cart
+			</button>
+
+	
+	
+	</div>
+	
+	<div class="small-12 large-4 columns" id="item">
+		
+		{% if item.gallery %}
+			{% for image in item.gallery %}
+				<img src="{{ image.url }}" />
+			{% endfor %}
+		{% endif %}
+
+			</div>
+	
+</div>
+	
+
+
+{% endblock %}

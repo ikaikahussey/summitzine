@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+
+{% set theexchange = getItem('departments', '-JokNt5xdKirGNi3a8Lq', true) %}
+
+<channel>
+
+<itunes:new-feed-url>http://theexchange.summitzine.com</itunes:new-feed-url>
+
+  <title>{{ theexchange.name }}</title>
+
+  <link>http://summitzine.com/departments/theexchange</link>
+
+  <language>en-us</language>
+
+  <copyright>&#x2117; &amp; &#xA9; 2015 Summit</copyright>
+
+  {% if podcast.subtitle %}
+    <itunes:subtitle>{{ theexchange.subtitle }}</itunes:subtitle>
+  {% endif %}
+
+  <itunes:author>Summit</itunes:author>
+
+  <itunes:summary>{{ theexchange.description }}</itunes:summary>
+
+  <description>{{ theexchange.description }}</description>
+
+  <itunes:owner>
+    <itunes:name>Summit</itunes:name>
+    <itunes:email>theexchange@summitzine.com</itunes:email>
+  </itunes:owner>
+
+  <itunes:image href="http://summitzine.com{{ theexchange.logo.url }}" />
+
+  <itunes:category text="Business">
+  <itunes:category text="Management &amp; Marketing"/>
+  </itunes:category>
+
+<itunes:explicit>clean</itunes:explicit>
+
+  {% for episode in theexchange.posts_department|slice(0,26) %}
+
+    <item>
+
+      <title>{{ episode.name }}</title>
+
+      <itunes:author>Summit</itunes:author>
+
+      <itunes:subtitle>{{ episode.teaser }}</itunes:subtitle>
+
+      <itunes:summary>{{ episode.teaser }}</itunes:summary>
+
+      <itunes:image href="http://summitzine.com{{ episode.tile_image.url }}" />
+
+      <enclosure url="http://summitzine.com{{ episode.podcast.url }}" length="{{ episode.podcast.size }}" type="{{ episode.podcast.type }}" />
+
+      <guid>http://summitzine.com{{ episode.podcast.url }}</guid>
+
+      <pubDate>{{ episode.publish_date|date('D, j M Y h:i:s') }} -1000</pubDate>
+
+      <itunes:duration>{{ episode.podcast.duration|duration }}</itunes:duration>
+
+    </item>
+
+  {% endfor %}
+
+</channel>
+
+</rss>

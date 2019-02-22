@@ -1,0 +1,23 @@
+{% extends "templates/partials/base.html" %}
+
+{% block title %}{% parent %} - {{ cms.search.name }}{% endblock %}
+{% block content %}
+
+
+<div class="block" style="padding-top: 31px;">
+
+<div id="tipue_search_content"></div>
+
+
+<script>
+$(document).ready(function() {
+     $('#tipue_search_input').tipuesearch();
+});
+</script>
+
+
+
+
+
+  
+{% endblock %}

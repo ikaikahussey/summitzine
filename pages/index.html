@@ -1,0 +1,180 @@
+{% extends "templates/partials/base.html" %}
+{% block content %}
+<!--
+{% set covers = cms.posts|where('magazine_cover') %}
+	{% for cover in covers|sort('publish_date', true)|slice(0,1) %}
+    <article class="posterboard">
+   			<img class="" src="{{ cover.cover.url }}">
+   		<a href="{% if cover.link %}{{ cover.link }}{% else %}{{ url(cover) }}{% endif %}">
+
+		   	<div class="magazine_cover_name">
+			   	{{ cover.name }}
+	   		</div>
+	   				   	</a>
+
+   		<a href="{% if cover.link %}{{ cover.link }}{% else %}{{ url(cover) }}{% endif %}">
+	   		
+	   		<div class="magazine_cover_teaser">
+		   		{{ cover.teaser }}
+		   	
+	   		</div>
+   		</a>
+	</article>
+{% endfor %}
+-->
+<div id="wrapper">
+	<div class="" id="tiles2">
+		<div class="gutter-sizer"></div>
+		<div class="grid-sizer"></div>
+	  	{% set tiles = cms.posts|where('evergreen') %}
+			{% for tile in tiles|sort('publish_date', true)|slice(0,50) %}
+		    <article class="{% if tile.department %}{% for dept in tile.department|slice(0,1) %}{{ dept.slug_department }}{% if not loop.last %}{% endif %}{% endfor %}{% endif %} tile2 {{ tile.tile_type }}2">
+		   		<a href="{% if tile.link %}{{ tile.link }}{% else %}{{ url(tile) }}{% endif %}">
+					<img class="" src="{{ tile.tile_image.url }}" style="width:auto;">
+		   		</a>
+		   		<div class="tile_content ui bottom right attached label {% if tile.department %}{% for dept in tile.department|slice(0,1) %}{{ dept.slug_department }}{% if not loop.last %}{% endif %}{% endfor %}{% endif %}">
+				   	<div class="tile_name {% if tile.department %}{% for dept in tile.department|slice(0,1) %}{{ dept.slug_department }}{% if not loop.last %}{% endif %}{% endfor %}{% endif %}">
+					   	<a href="{% if tile.link %}{{ tile.link }}{% else %}{{ url(tile) }}{% endif %}">{% if tile.two_words %}{{ tile.two_words }}{% else %}{{ tile.name }}{% endif %}</a>
+			   		</div>
+			   		<ul class="post_info_index">
+						{% if tile.department %}
+							{% for dept in tile.department|slice(0,1) %}
+								<li class="dept_tag {{ dept.slug_department }}">
+									<a class="dept_tag {{ dept.slug_department }}" href="{% if tile.link %}{{ tile.link }}{% else %}{{ url(dept) }}{% endif %}">{{ dept.name }}</a>
+								</li>
+							{% if not loop.last %}{% endif %}
+							{% endfor %}
+						{% endif %}
+					</ul>
+			   		<div class="teaser hidden-xs">
+			   			{{ tile.teaser }}
+			   		</div>
+			   </div>
+	    	</article>
+		{% endfor %}
+	</div>
+</div>
+<div id="midroll">
+	<div class="row column">
+		<section class="ad hide-for-small-only" style="text-align:center;padding:1.5rem 0;">
+			<script src="//ap.lijit.com/www/delivery/fpi.js?z=452391&width=728&height=90"></script> 
+		</section>
+	</div>
+</div>
+<section id="missives">
+	<div class="row">
+		<div class="small-centered small-12 large-6 columns" style="padding: 2rem;">
+			<header class="text-center" id="">
+				Missives
+			</header>
+			{% set latest = cms.posts %}
+		  	{% set latest = cms.posts|sort("publish_date", true)%}
+			{% for post in latest|sort('evergreen', false)|slice(0,10) %}
+			<excerpt class="row" style="">
+				<div class="">
+					<header class="excerpt" style="font-size: 1.5rem;font-family: 'Surveyor SSm A', 'Surveyor SSm B';text-transform:none;font-weight: bold;text-align:left;">
+						<a href="{% if post.link %}{{ post.link }}{% else %}{{ url(post) }}{% endif %}">
+							{{ post.name }}
+						</a>
+					</header>
+					
+					<aside>
+						<time style="font-size:smaller;opacity:.7;">
+							{{ post.publish_date|date('F d Y') }}
+						</time>
+					</aside>
+	
+					
+					{% if post.teaser %}
+						{{ post.teaser }}
+						<a class="readmore" href="{% if post.link %}{{ post.link }}{% else %}{{ url(post) }}{% endif %}">Read</a>
+					{% else %}
+						{{ post.body|safe }}
+					{% endif %}
+				</div>
+			</excerpt>
+		{% endfor %}
+		</div>
+	</div>
+</section>
+<script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
+<script src="https://unpkg.com/isotope-layout@3.0/dist/isotope.pkgd.js"></script>
+<script src="/static/javascript/packery-mode.pkgd.min.js"></script>
+<!-- <script src="/static/javascript/6f172c6a.packery.pkgd.min.js"></script> -->
+<script type="text/javascript">
+
+var $grid = $('#tiles2').isotope({
+  
+  layoutMode: 'packery',
+packery: {
+  columnWidth: '.grid-sizer',
+  gutter: '.gutter-sizer'
+},
+itemSelector: '.tile2',
+percentPosition: true  
+});
+// layout Isotope after each image loads
+$grid.imagesLoaded().progress( function() {
+  $grid.isotope('layout');
+});
+
+$('.filter-button-group').on( 'click', 'button', function() {
+  var filterValue = $(this).attr('data-filter');
+  $grid.isotope({ filter: filterValue });
+});
+
+// change is-checked class on buttons
+$('.button-group').each( function( i, buttonGroup ) {
+  var $buttonGroup = $( buttonGroup );
+  $buttonGroup.on( 'click', 'button', function() {
+    $buttonGroup.find('.is-checked').removeClass('is-checked');
+    $( this ).addClass('is-checked');
+  });
+});
+  
+
+function getHashFilter() {
+  var hash = location.hash;
+  // get filter=filterName
+  var matches = location.hash.match( /filter=([^&]+)/i );
+  var hashFilter = matches && matches[1];
+  return hashFilter && decodeURIComponent( hashFilter );
+}
+
+$( function() {
+
+  var $grid = $('.isotope');
+
+  // bind filter button click
+  var $filters = $('#filters').on( 'click', 'button', function() {
+    var filterAttr = $( this ).attr('data-filter');
+    // set filter in hash
+    location.hash = 'filter=' + encodeURIComponent( filterAttr );
+  });
+
+  var isIsotopeInit = false;
+
+  function onHashchange() {
+    var hashFilter = getHashFilter();
+    if ( !hashFilter && isIsotopeInit ) {
+      return;
+    }
+    isIsotopeInit = true;
+    // filter isotope
+    $grid.isotope({
+      itemSelector: '.element-item',
+      filter: hashFilter
+    });
+    // set selected class on button
+    if ( hashFilter ) {
+      $filters.find('.is-checked').removeClass('is-checked');
+      $filters.find('[data-filter="' + hashFilter + '"]').addClass('is-checked');
+    }
+  }
+  $(window).on( 'hashchange', onHashchange );
+  // trigger event handler to init Isotope
+  onHashchange();
+});
+
+</script>
+{% endblock %}

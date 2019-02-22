@@ -1,0 +1,39 @@
+<article class="item row">
+	<div class="col-sm-6">
+		<header class="">
+			<a href="{{ url(item) }}">
+				{{ item.name }}
+			</a>
+		</header>
+<!--
+		<div class="">
+			{{ item.dek }}
+		</div>
+-->
+		<div class="">
+			{{ item.wysiwyg_text|safe }}
+		</div>
+	</div>
+	<div class="col-sm-6">				
+		<div class="ui divided selection list">
+			<div class="ui green horizontal label">start</div> {{ item.start|date('F d Y, g a') }}
+			{% if item.end %}
+				<div class="ui red horizontal label">end</div> {{ item.end|date('F d Y, g a') }}
+			{% endif %}
+		</div>
+		{% if item.partner %}
+			<li id="partner">
+				{% for each in item.partner %}
+					<a href="/" class="summitbrand">Summit</a> + <a href="{{ url(each) }}">{{ each.name }}</a>
+				{% endfor %}
+			</li>
+		{% endif %}
+		{% if item.places %}
+			<div class="ui blue horizontal label">location</div>
+				{% for each in item.places %}
+					<a href="{{ url(each) }}">{{ each.name }}</a>
+				{% endfor %}
+			</div>
+		{% endif %}
+	</div>
+</article>

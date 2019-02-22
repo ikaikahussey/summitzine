@@ -1,0 +1,30 @@
+{% extends "templates/partials/base.html" %}
+{% block title %}{% parent %} - The Agenda{% endblock %}
+
+{% block content %}
+  {% set data = cms.agenda %}
+  {% set data = data|sort('data.start', true) %}
+  {% set data = paginate(data, 10) %}
+	<section id="below_the_fold" class="container-fluid">
+		<section class="col-md-12" id="latest">
+			
+			<div class="page-header row">
+				<header class="section_header">
+				<h1 id="landing">
+				The agenda
+				</h1>
+				<small>Curated events and island to-dos</small>
+			
+			</header>
+			</div>
+			
+			
+			{% for item in data %}
+
+			{% include "templates/partials/calendar_list_item.html" %}
+
+			{% endfor %}
+		{% include "templates/partials/paginator.html" %}
+		</section>
+	</section>	
+{% endblock %}

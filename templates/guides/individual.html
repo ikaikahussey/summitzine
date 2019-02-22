@@ -1,0 +1,135 @@
+{% extends "templates/partials/base.html" %}
+{% block title %}{% parent %} - {{ item.name }}{% endblock %}
+{% block content %}
+
+<div class="container-fluid" id="content">
+	<ul class="breadcrumb">
+		<li><a href="{{ url('guides') }}"><i class="icon arrow left"></i> All Guides</a></li>
+		<li><a href="/guides/hello-aloha"><i class="icon compass"></i> Hello Aloha</a></li>
+		<li style="opacity: .5;">{{ item.name }}</li>
+	</ul>  
+	<div class="row" style="margin-bottom:20px;">
+		<div class="col-sm-2">
+			<img style="margin-bottom:20px;" class="ui medium rounded image" src="{{ item.tile.url }}" />
+		</div>
+		<div class="col-sm-10">
+			<h1 style="margin-top:0px;">{{ item.name }}</h1>
+			<p>{{ item.wysiwyg_text|safe }}</p>
+		</div>
+	</div>
+	{% if item.relationship %}
+	<div class="row">
+		<div class="col-sm-2">
+			<header>Listings</header>
+		</div>
+		<div class="col-sm-10">
+				<div class="ui cards">
+					{% for relation in item.relationship %}
+					<div class="card {% if relation.paid %}orange{% endif %}">
+						{% if relation.paid %}<div class="ui orange right ribbon label" style="background-color:#F2711C;">Sponsored</div>{% endif %}
+						<a class="image" href="{{ url(relation) }}">
+							<img src="{{ relation.tile|imageSize(300, 300) }}" />
+						</a>
+						<div class="content">
+							<a class="header" href="{{ url(relation) }}">
+								{{ relation.name }}
+							</a>
+							{% if relation.address.street1 %}
+								<div class="address">
+										<a href="http://maps.google.com/?q={{ relation.address.street1 }} {{ relation.address.city }} {{ relation.address.state }}">
+									<address>
+								
+									  {{ relation.address.street1 }}
+									  <br/>
+									  {% if relation.address.street2 %}{{ relation.address.street2 }}<br/>{% endif %}
+									  {% if relation.address.city %}
+									  	{{ relation.address.city }}, {{ relation.address.state }}
+									  {% endif %}
+									  {{ relation.address.country }}{{ relation.address.zip }}
+									</address>
+										</a>
+								</div>
+							{% endif %}
+							<div class="description">
+								{{ relation.description|safe }}
+							</div>
+						</div>
+						{% if relation.phone %}
+							<div class="extra content">
+								<a href="tel:+{{relation.phone}}"><i class="phone square icon"></i> {{relation.phone}}</a>
+							</div>
+						{% endif %}
+						<div class="extra content" id="related_stories">
+							{% for story in relation.related_posts %}
+								<a href="{{ url(story) }}"><!-- {{ story.name }} --><img src="{{ story.tile_image|imageSize(50,50) }}" style="width:50px;height:50px;"></a>
+					        {% endfor %}
+					        {% for tag in relation.tags %}
+								<div class="ui label"><a href="{{ url(tag) }}">{{ tag.name }}</a></div>
+							{% endfor %}
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{% endif %}
+	
+	{% if item.related_guide %}
+		<div class="row" style="margin-top:20px;">
+			<div class="col-md-2">
+				<header>Related <i class="compass icon"></i></header>
+			</div>
+			<div class="col-sm-10">
+				<div class="ui cards">
+					{% for related in item.related_guide %}
+						<div class="card">
+							<a class="image" href="{{ url(related) }}">
+								<img src="{{ related.tile|imageSize(300, 300) }}" />
+							</a>
+							<div class="content">
+								<a class="header" href="{{ url(related) }}">
+									{{ related.name }}
+								</a>
+								<div class="description">
+									{{ related.description|safe }}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+<div class="row" style="margin-top:20px;">
+		<div class="col-md-2">
+		</div>
+		<div class="col-sm-10">
+			<div class="well">
+			<header>Sign up for special offers and invitations</header>
+
+
+	<div class="createsend-button" style="height:27px;display:inline-block;" data-listid="i/FD/07A/92E/B89ADD2C8DBCB944">
+	</div><script type="text/javascript">(function () { var e = document.createElement('script'); e.type = 'text/javascript'; e.async = true; e.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://btn.createsend1.com/js/sb.min.js?v=3'; e.className = 'createsend-script'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(e, s); })();</script>
+			</div>
+		</div>
+
+</div>
+
+</div>
+	
+<!--
+<script src="/static/javascript/6f172c6a.6f172c6a.packery.pkgd.min.js"></script>
+<script type="text/javascript">
+var container = document.querySelector('.cards');
+var pckry = new Packery( container, {
+  // options
+  itemSelector: '.card'
+});
+var $stamp = $container.find('.stamp').first();
+var isStamped = false;
+</script>
+-->
+
+
+{% endblock %}
